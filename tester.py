@@ -1,87 +1,124 @@
-# orphans_example.py
-
 def used_function_a():
-    """This function is used by main_caller."""
+    """Execute the primary action for used_function_a.
+
+    This function is called by main_caller to perform its designated task,
+    printing a message to the console and returning a result string.
+
+    Returns:
+        str: A message indicating the result of used_function_a execution."""
     print("Executing used_function_a")
     return "Result from A"
 
+
 def another_used_function_b(param1, param2="default"):
-    """
-    This function is also used.
-    It takes parameters.
-    """
+    """Execute a sample operation using param1 and param2, then return param1 incremented by 10.
+
+    Args:
+        param1 (int): The primary integer parameter to process.
+        param2 (str, optional): An optional string parameter with a default value of "default".
+
+    Returns:
+        int: The result of adding 10 to param1."""
     print(f"Executing another_used_function_b with {param1} and {param2}")
     return param1 + 10
 
+
 def an_orphan_function():
-    """
-    This function is NOT called by any other function in this file.
-    It should be detected as an orphan.
-    """
+    """Executes a standalone function that prints and returns a value.
+
+    This function is not invoked by any other function within the module `tester.py`
+    and serves as an example of an orphan function.
+
+    Returns:
+        int: Twice the secret value (84)."""
     secret_value = 42
     print(f"Executing an_orphan_function. Secret is {secret_value}")
     return secret_value * 2
+
 
 class UtilityClass:
     """A class with some utility methods."""
 
     def __init__(self, name):
-        """Constructor, called on instantiation."""
+        """Initializes the UtilityClass instance with a given name.
+
+        Args:
+            name (str): The name to assign to the instance.
+
+        Sets the instance's name attribute and prints an initialization message."""
         self.name = name
         print(f"UtilityClass '{self.name}' initialized.")
 
     def used_method_x(self, value):
-        """This method is called by main_caller."""
+        """Executes a processing routine using the provided value and logs the action.
+
+        Args:
+            value: The input data to be processed by this method.
+
+        Returns:
+            A string indicating that the value has been processed by method X.
+
+        Note:
+            This method is called by the main_caller function as part of the workflow involving UtilityClass instances."""
         print(f"UtilityClass '{self.name}' executing used_method_x with value: {value}")
         return f"X processed {value}"
 
     def an_orphan_method(self):
-        """
-        This method is NOT called by any other function or method in this file.
-        It should be detected as an orphan.
-        """
+        """Executes an isolated utility method that is not invoked elsewhere in the module.
+
+        This method prints a message indicating execution along with the instance's `name` attribute,
+        and returns a fixed string. It is designed to be an orphan method, meaning it is not called
+        by any other function or method within the same file.
+
+        Returns:
+            str: A predefined result string "Orphan method result"."""
         print(f"UtilityClass '{self.name}' executing an_orphan_method.")
         return "Orphan method result"
 
     def _internal_helper(self):
-        """
-        This internal helper might be called by other methods in this class.
-        Let's make it called by used_method_x to ensure it's not an orphan.
-        """
+        """Internal helper method that returns a predefined string value.
+
+        This method is intended for internal use within the class and may be
+        called by other methods such as `used_method_x` to provide shared
+        functionality or data.
+
+        Returns:
+            str: A constant string "Internal helper data"."""
         return "Internal helper data"
-    
+
     def another_used_method_y(self):
-        """This method calls an internal helper."""
+        """Calls an internal helper method, logs its result, and returns True.
+
+        This method invokes the internal helper `_internal_helper` to retrieve data,
+        prints the retrieved data for debugging or informational purposes, and then
+        returns `True` to indicate successful execution.
+
+        Returns:
+            bool: Always returns True."""
         helper_data = self._internal_helper()
         print(f"another_used_method_y got: {helper_data}")
         return True
 
 
 def main_caller():
-    """
-    This function acts as an entry point or a caller for other used functions.
-    """
+    """Executes a sequence of function calls and methods, serving as the primary entry point for invoking various utility and helper functions.
+
+    Calls used_function_a and prints its result.
+    Calls another_used_function_b with specific arguments and prints its result.
+    Creates an instance of UtilityClass and calls its used_method_x and another_used_method_y methods, printing results where applicable.
+
+    This function does not take any parameters or return a value. It primarily handles orchestration and displays output to standard output."""
     print("Starting main_caller execution.")
-    
     result_a = used_function_a()
     print(f"Result from used_function_a: {result_a}")
-    
     result_b = another_used_function_b(5, param2="custom")
     print(f"Result from another_used_function_b: {result_b}")
-
     util_instance = UtilityClass("MyUtil")
     method_result_x = util_instance.used_method_x("test_value")
     print(f"Result from util_instance.used_method_x: {method_result_x}")
-
     util_instance.another_used_method_y()
-
     print("Finished main_caller execution.")
 
-# Example of how main_caller might be invoked if this were a script.
-# Helix CME's orphan detection won't typically consider this block for call graph analysis
-# unless specifically configured to understand script entry points.
+
 if __name__ == "__main__":
     main_caller()
-    # an_orphan_function() # If this was uncommented, it wouldn't be an orphan
-    # util = UtilityClass("Test")
-    # util.an_orphan_method() # If this was uncommented, it wouldn't be an orphan
