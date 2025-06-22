@@ -75,29 +75,6 @@ class UtilityClass:
         print(f"UtilityClass '{self.name}' executing an_orphan_method.")
         return "Orphan method result"
 
-    def _internal_helper(self):
-        """Internal helper method that returns a predefined string value.
-
-        This method is intended for internal use within the class and may be
-        called by other methods such as `used_method_x` to provide shared
-        functionality or data.
-
-        Returns:
-            str: A constant string "Internal helper data"."""
-        return "Internal helper data"
-
-    def another_used_method_y(self):
-        """Calls an internal helper method, logs its result, and returns True.
-
-        This method invokes the internal helper `_internal_helper` to retrieve data,
-        prints the retrieved data for debugging or informational purposes, and then
-        returns `True` to indicate successful execution.
-
-        Returns:
-            bool: Always returns True."""
-        helper_data = self._internal_helper()
-        print(f"another_used_method_y got: {helper_data}")
-        return True
 
 
 def main_caller():
