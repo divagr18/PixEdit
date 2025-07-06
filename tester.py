@@ -1,8 +1,7 @@
 def used_function_a():
     """Execute the primary action for used_function_a.
 
-    This function is called by main_caller to perform its designated task,
-    printing a message to the console and returning a result string.
+    Called by main_caller to perform its designated task, this function prints a message to the console and returns a result string.
 
     Returns:
         str: A message indicating the result of used_function_a execution."""
@@ -11,23 +10,22 @@ def used_function_a():
 
 
 def another_used_function_b(param1, param2="default"):
-    """Execute a sample operation using param1 and param2, then return param1 incremented by 10.
+    """Perform a sample operation with param1 and param2, returning param1 incremented by 10.
 
     Args:
-        param1 (int): The primary integer parameter to process.
-        param2 (str, optional): An optional string parameter with a default value of "default".
+        param1 (int): The primary integer input.
+        param2 (str, optional): An optional string parameter, defaults to "default".
 
     Returns:
-        int: The result of adding 10 to param1."""
+        int: The value of param1 plus 10."""
     print(f"Executing another_used_function_b with {param1} and {param2}")
     return param1 + 10
 
 
 def an_orphan_function():
-    """Executes a standalone function that prints and returns a value.
+    """Executes a standalone example function that prints a message and returns a computed value.
 
-    This function is not invoked by any other function within the module `tester.py`
-    and serves as an example of an orphan function.
+    This function is not called by any other function within the `tester.py` module and demonstrates an orphan function.
 
     Returns:
         int: Twice the secret value (84)."""
@@ -40,12 +38,12 @@ class UtilityClass:
     """A class with some utility methods."""
 
     def __init__(self, name):
-        """Initializes the UtilityClass instance with a given name.
+        """Initializes a UtilityClass instance with the specified name.
 
         Args:
             name (str): The name to assign to the instance.
 
-        Sets the instance's name attribute and prints an initialization message."""
+        Sets the instance's name attribute and prints a confirmation message upon initialization."""
         self.name = name
         print(f"UtilityClass '{self.name}' initialized.")
 
@@ -56,7 +54,7 @@ class UtilityClass:
             value: The input data to be processed by this method.
 
         Returns:
-            A string indicating that the value has been processed by method X.
+            str: A string indicating that the value has been processed by method X.
 
         Note:
             This method is called by the main_caller function as part of the workflow involving UtilityClass instances."""
@@ -64,27 +62,25 @@ class UtilityClass:
         return f"X processed {value}"
 
     def an_orphan_method(self):
-        """Executes an isolated utility method that is not invoked elsewhere in the module.
+        """Executes an isolated utility method that prints a message and returns a fixed string.
 
-        This method prints a message indicating execution along with the instance's `name` attribute,
-        and returns a fixed string. It is designed to be an orphan method, meaning it is not called
-        by any other function or method within the same file.
+        This method outputs a message indicating it is running, including the instance's `name` attribute.
+        It is intentionally designed as an orphan method, not called by any other code within the module.
 
         Returns:
-            str: A predefined result string "Orphan method result"."""
+            str: The fixed result string "Orphan method result"."""
         print(f"UtilityClass '{self.name}' executing an_orphan_method.")
         return "Orphan method result"
 
 
-
 def main_caller():
-    """Executes a sequence of function calls and methods, serving as the primary entry point for invoking various utility and helper functions.
+    """Executes a sequence of utility functions and methods, serving as the main entry point.
 
-    Calls used_function_a and prints its result.
-    Calls another_used_function_b with specific arguments and prints its result.
-    Creates an instance of UtilityClass and calls its used_method_x and another_used_method_y methods, printing results where applicable.
+    Calls `used_function_a` and prints its result.
+    Calls `another_used_function_b` with specific arguments and prints its result.
+    Creates a `UtilityClass` instance and invokes its `used_method_x` and `another_used_method_y` methods, printing results where applicable.
 
-    This function does not take any parameters or return a value. It primarily handles orchestration and displays output to standard output."""
+    This function does not accept any arguments or return a value. It orchestrates calls and outputs results to standard output."""
     print("Starting main_caller execution.")
     result_a = used_function_a()
     print(f"Result from used_function_a: {result_a}")
